@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.env.*
+.DS_Store
+.vscode/
+supabase/.branches/
+supabase/.temp/
+.idea/
+Thumbs.db

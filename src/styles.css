@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-green: #4c5937;
+  --brand-green-dark: #3a4528;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea,
+select,
+a {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand-green);
+  outline-offset: 3px;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.rootd-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.rootd-sidebar {
+  width: 240px;
+}
+
+.rootd-main-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.rootd-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.touch-target {
+  min-height: 44px;
+}
+
+@media (max-width: 1024px) {
+  .rootd-shell {
+    flex-direction: column;
+  }
+
+  .rootd-sidebar {
+    width: 100%;
+    position: static !important;
+    height: auto !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .rootd-main-wrapper {
+    padding-bottom: 80px;
+  }
+
+  .rootd-stack-sm {
+    flex-direction: column !important;
+  }
+
+  .rootd-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 15px;
+  }
+
+  button,
+  input,
+  select {
+    min-height: 48px;
+  }
+}
