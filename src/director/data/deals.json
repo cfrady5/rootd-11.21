@@ -1,0 +1,56 @@
+[
+  {
+    "id": "deal-001",
+    "athlete": "Ava Thompson",
+    "business": "Nike Women",
+    "type": "Apparel",
+    "value": 48000,
+    "status": "Active",
+    "complianceDocs": ["W-9", "Disclosure"]
+  },
+  {
+    "id": "deal-002",
+    "athlete": "Liam Bennett",
+    "business": "SoFi",
+    "type": "Financial",
+    "value": 62000,
+    "status": "Pending",
+    "complianceDocs": ["W-9"]
+  },
+  {
+    "id": "deal-003",
+    "athlete": "Noah Ramirez",
+    "business": "Beats",
+    "type": "Media",
+    "value": 54000,
+    "status": "Active",
+    "complianceDocs": ["W-9", "Contract"]
+  },
+  {
+    "id": "deal-004",
+    "athlete": "Maya Chen",
+    "business": "Lululemon",
+    "type": "Lifestyle",
+    "value": 32000,
+    "status": "Docs Needed",
+    "complianceDocs": []
+  },
+  {
+    "id": "deal-005",
+    "athlete": "Sofia Alvarez",
+    "business": "Rolex",
+    "type": "Luxury",
+    "value": 87000,
+    "status": "Active",
+    "complianceDocs": ["W-9", "Tax", "Disclosure"]
+  },
+  {
+    "id": "deal-006",
+    "athlete": "Miles Garner",
+    "business": "Titleist",
+    "type": "Equipment",
+    "value": 26000,
+    "status": "Review",
+    "complianceDocs": ["W-9", "Contract"]
+  }
+]

@@ -4,7 +4,7 @@ dist/
 .env.*
 .DS_Store
 .vscode/
-supabase/.branches/
-supabase/.temp/
+rootd-clean/supabase/.branches/
+rootd-clean/supabase/.temp/
 .idea/
 Thumbs.db

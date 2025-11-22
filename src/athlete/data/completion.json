@@ -1,0 +1,14 @@
+{
+  "profileCompletion": 94,
+  "complianceDocs": [
+    { "label": "W-9", "status": "Submitted" },
+    { "label": "1099", "status": "Submitted" },
+    { "label": "Disclosure", "status": "Submitted" },
+    { "label": "Contract", "status": "Signed" }
+  ],
+  "timeline": [
+    { "label": "Content", "value": 90 },
+    { "label": "Compliance", "value": 100 },
+    { "label": "Financial", "value": 88 }
+  ]
+}

@@ -3,13 +3,14 @@ import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '../director/PremiumComponents.jsx';
+import { brandPalette, typeScale } from '../../lib/designSystem.js';
 import RootdLogo from '../../assets/branding/rootd-logo.png';
 
 const palette = {
-  primary: '#4c5937',
-  dark: '#2f3621',
-  background: '#f5f7f0',
-  surface: 'rgba(255,255,255,0.85)'
+  primary: brandPalette.sage,
+  dark: brandPalette.sageDark,
+  background: brandPalette.bone,
+  surface: 'rgba(255,255,255,0.88)'
 };
 
 const navLinks = [
@@ -86,16 +87,118 @@ function MarketingNav() {
   );
 }
 
-const badges = [
-  { label: 'Live compliance telemetry', value: '2.7M events processed' },
-  { label: 'Deal velocity lift', value: '+41% faster approvals' },
-  { label: 'Athlete satisfaction', value: '98% CSAT (2025 cohort)' }
+const heroStats = [
+  { label: 'Live compliance telemetry', value: '2.7M events', helper: 'streaming into Rootd' },
+  { label: 'Deal velocity lift', value: '+41%', helper: 'faster approvals' },
+  { label: 'Athlete satisfaction', value: '98% CSAT', helper: '2025 cohort' }
 ];
+
+const heroHighlights = [
+  'Director cockpit + automations',
+  'Athlete portal with proactive nudges',
+  'Full telemetry streaming to partners'
+];
+
+function HeroStat({ label, value, helper }) {
+  return (
+    <div style={{
+      padding: '20px',
+      borderRadius: '24px',
+      border: '1px solid rgba(76,89,55,0.12)',
+      backgroundColor: 'rgba(255,255,255,0.9)',
+      boxShadow: '0 18px 45px rgba(15,23,42,0.08)'
+    }}
+    >
+      <p style={{ margin: 0, fontSize: '13px', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#94a3b8' }}>{label}</p>
+      <p style={{ margin: '8px 0 0', fontSize: '1.8rem', fontWeight: 600 }}>{value}</p>
+      <p style={{ margin: '6px 0 0', color: '#475467' }}>{helper}</p>
+    </div>
+  );
+}
+
+function HomeHero({ onDemo, onSignup }) {
+  return (
+    <section style={{ padding: '80px 0 40px' }}>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
+        padding: '0 32px',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        gap: '32px',
+        alignItems: 'center'
+      }}
+      >
+        <div>
+          <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '8px 16px',
+            borderRadius: '999px',
+            backgroundColor: 'rgba(76,89,55,0.12)',
+            color: brandPalette.sageDark,
+            fontWeight: 600,
+            fontSize: typeScale.small,
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase'
+          }}
+          >
+            <Sparkles size={16} />
+            Unified NIL OS
+          </span>
+          <h1 style={{
+            fontSize: typeScale.display,
+            lineHeight: 1.1,
+            margin: '24px 0 16px',
+            color: brandPalette.charcoal
+          }}
+          >
+            Bring every director, athlete, and partner back into the same workspace.
+          </h1>
+          <p style={{ fontSize: typeScale.subhead, color: '#475467', margin: '0 0 28px', maxWidth: '540px' }}>
+            Rootd orchestrates compliance, finance, and creative deliverables with real-time telemetry and automations purpose-built for athletic departments.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+            <Button variant="primary" size="lg" onClick={onDemo}>
+              Explore the demo
+            </Button>
+            <Button variant="secondary" size="lg" onClick={onSignup}>
+              Create workspace
+            </Button>
+          </div>
+          <ul style={{
+            listStyle: 'none',
+            padding: 0,
+            margin: '28px 0 0',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '10px'
+          }}
+          >
+            {heroHighlights.map((highlight) => (
+              <li key={highlight} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#475467', fontWeight: 500 }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '999px', backgroundColor: brandPalette.sage }} />
+                {highlight}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+          {heroStats.map((stat) => (
+            <HeroStat key={stat.label} {...stat} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function AppShell({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === '/';
+
   return (
     <div style={{ minHeight: '100vh', backgroundColor: palette.background, color: '#0f172a' }}>
       <div style={{ position: 'relative', overflow: 'hidden' }}>
@@ -147,73 +250,17 @@ export default function AppShell({ children }) {
             </div>
           </div>
         </header>
-
         {isHome && (
-          <section style={{ padding: '80px 32px 40px' }}>
-            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-              <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '18px',
-                maxWidth: '720px'
-              }}
-              >
-                <span style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '6px 14px',
-                  borderRadius: '999px',
-                  background: 'rgba(76,89,55,0.08)',
-                  color: palette.primary,
-                  fontSize: '13px',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase'
-                }}
-                >
-                  <Sparkles size={16} />
-                  Built for 2025 collectives
-                </span>
-                <h1 style={{ fontSize: '52px', lineHeight: 1.1, margin: 0, letterSpacing: '-0.04em' }}>
-                  Built by athletes, rootd in community.
-                </h1>
-                <p style={{ fontSize: '18px', color: '#475467', margin: 0, lineHeight: 1.6 }}>
-                  From match intelligence to compliance automation, Rootd mirrors the exact workflows your department runs everyday and wraps them inside a premium, board-ready experience.
-                </p>
-              </div>
-              <div style={{ display: 'flex', gap: '16px', marginTop: '32px', flexWrap: 'wrap' }}>
-                <Button variant="primary" size="lg" style={{ minWidth: '200px' }}>
-                  Launch live workspace
-                </Button>
-                <Button variant="secondary" size="lg">
-                  Download product brief
-                </Button>
-              </div>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                gap: '16px',
-                marginTop: '40px'
-              }}
-              >
-                {badges.map((badge) => (
-                  <div
-                    key={badge.label}
-                    style={{
-                      padding: '18px',
-                      borderRadius: '16px',
-                      border: '1px solid rgba(76,89,55,0.15)',
-                      background: 'rgba(255,255,255,0.7)',
-                      backdropFilter: 'blur(8px)'
-                    }}
-                  >
-                    <p style={{ margin: 0, fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#475467' }}>{badge.label}</p>
-                    <p style={{ margin: '8px 0 0', fontSize: '18px', fontWeight: 600, color: palette.dark }}>{badge.value}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+          <div style={{
+            position: 'relative',
+            background: 'radial-gradient(circle at 10% 20%, rgba(76,89,55,0.12), transparent 55%)'
+          }}
+          >
+            <HomeHero
+              onDemo={() => navigate('/demo')}
+              onSignup={() => navigate('/signup')}
+            />
+          </div>
         )}
       </div>
 

@@ -805,33 +805,38 @@ export function Button({
     primary: {
       backgroundColor: brand.primary,
       color: 'white',
-      border: 'none',
+      border: '1px solid transparent',
       hoverBg: brand.dark
     },
     secondary: {
-      backgroundColor: 'white',
-      color: '#374151',
-      border: '1px solid #d1d5db',
-      hoverBg: '#f9fafb'
+      backgroundColor: 'rgba(76,89,55,0.08)',
+      color: brand.primary,
+      border: '1px solid rgba(76,89,55,0.24)',
+      hoverBg: 'rgba(76,89,55,0.12)'
     },
     danger: {
       backgroundColor: '#dc2626',
       color: 'white',
-      border: 'none',
+      border: '1px solid transparent',
       hoverBg: '#b91c1c'
     },
     ghost: {
       backgroundColor: 'transparent',
       color: '#374151',
-      border: 'none',
-      hoverBg: '#f3f4f6'
+      border: '1px solid transparent',
+      hoverBg: 'rgba(15,23,42,0.04)'
     }
   };
 
   const sizes = {
-    sm: { padding: '6px 12px', fontSize: '13px' },
-    md: { padding: '10px 16px', fontSize: '14px' },
-    lg: { padding: '12px 24px', fontSize: '16px' }
+    sm: { padding: '8px 18px', fontSize: '0.9rem' },
+    md: { padding: '12px 24px', fontSize: '1rem' },
+    lg: { padding: '15px 30px', fontSize: '1.05rem' }
+  };
+
+  const baseStyle = {
+    borderRadius: '999px',
+    letterSpacing: '-0.01em'
   };
 
   const style = variants[variant];
@@ -841,7 +846,10 @@ export function Button({
     <motion.button
       onClick={onClick}
       disabled={disabled}
-      whileHover={{ scale: disabled ? 1 : 1.02, backgroundColor: disabled ? style.backgroundColor : style.hoverBg }}
+      whileHover={{
+        scale: disabled ? 1 : 1.01,
+        backgroundColor: disabled ? style.backgroundColor : style.hoverBg
+      }}
       whileTap={{ scale: disabled ? 1 : 0.98 }}
       style={{
         display: 'inline-flex',
@@ -850,11 +858,11 @@ export function Button({
         gap: '8px',
         ...sizeStyle,
         fontWeight: '600',
-        borderRadius: '8px',
         cursor: disabled ? 'not-allowed' : 'pointer',
         opacity: disabled ? 0.5 : 1,
         transition: 'all 0.2s',
         width: fullWidth ? '100%' : undefined,
+        ...baseStyle,
         ...style,
         ...customStyle
       }}

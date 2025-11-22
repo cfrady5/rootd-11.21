@@ -1,0 +1,98 @@
+[
+  {
+    "id": "ath-001",
+    "name": "Ava Thompson",
+    "email": "ava.thompson@stanford.edu",
+    "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80",
+    "sport": "Women’s Soccer",
+    "classYear": "2025",
+    "profileCompletion": 96,
+    "dealsCount": 5,
+    "revenue": 78000,
+    "complianceStatus": "Clear"
+  },
+  {
+    "id": "ath-002",
+    "name": "Liam Bennett",
+    "email": "liam.bennett@stanford.edu",
+    "avatar": "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=200&q=80",
+    "sport": "Football",
+    "classYear": "2024",
+    "profileCompletion": 88,
+    "dealsCount": 8,
+    "revenue": 142000,
+    "complianceStatus": "Review"
+  },
+  {
+    "id": "ath-003",
+    "name": "Noah Ramirez",
+    "email": "noah.ramirez@stanford.edu",
+    "avatar": "https://images.unsplash.com/photo-1522556189639-6ae73b4c7a81?auto=format&fit=crop&w=200&q=80",
+    "sport": "Men’s Basketball",
+    "classYear": "2026",
+    "profileCompletion": 92,
+    "dealsCount": 6,
+    "revenue": 109000,
+    "complianceStatus": "Clear"
+  },
+  {
+    "id": "ath-004",
+    "name": "Maya Chen",
+    "email": "maya.chen@stanford.edu",
+    "avatar": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=200&q=80",
+    "sport": "Women’s Volleyball",
+    "classYear": "2025",
+    "profileCompletion": 84,
+    "dealsCount": 3,
+    "revenue": 54000,
+    "complianceStatus": "Docs Needed"
+  },
+  {
+    "id": "ath-005",
+    "name": "Ethan Park",
+    "email": "ethan.park@stanford.edu",
+    "avatar": "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=200&q=80",
+    "sport": "Baseball",
+    "classYear": "2027",
+    "profileCompletion": 75,
+    "dealsCount": 2,
+    "revenue": 23000,
+    "complianceStatus": "Pending"
+  },
+  {
+    "id": "ath-006",
+    "name": "Sofia Alvarez",
+    "email": "sofia.alvarez@stanford.edu",
+    "avatar": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=200&q=80",
+    "sport": "Women’s Tennis",
+    "classYear": "2023",
+    "profileCompletion": 99,
+    "dealsCount": 11,
+    "revenue": 187000,
+    "complianceStatus": "Clear"
+  },
+  {
+    "id": "ath-007",
+    "name": "Miles Garner",
+    "email": "miles.garner@stanford.edu",
+    "avatar": "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=200&q=80",
+    "sport": "Men’s Golf",
+    "classYear": "2026",
+    "profileCompletion": 81,
+    "dealsCount": 4,
+    "revenue": 41000,
+    "complianceStatus": "Review"
+  },
+  {
+    "id": "ath-008",
+    "name": "Chloe Whitaker",
+    "email": "chloe.whitaker@stanford.edu",
+    "avatar": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=200&q=80",
+    "sport": "Women’s Gymnastics",
+    "classYear": "2024",
+    "profileCompletion": 90,
+    "dealsCount": 7,
+    "revenue": 97000,
+    "complianceStatus": "Clear"
+  }
+]

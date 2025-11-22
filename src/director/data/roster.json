@@ -1,0 +1,7 @@
+[
+  { "athleteId": "ath-001", "gpa": 3.84, "lastEngagement": "2 days ago" },
+  { "athleteId": "ath-002", "gpa": 3.52, "lastEngagement": "Today" },
+  { "athleteId": "ath-003", "gpa": 3.31, "lastEngagement": "4 days ago" },
+  { "athleteId": "ath-004", "gpa": 3.67, "lastEngagement": "Yesterday" },
+  { "athleteId": "ath-005", "gpa": 3.44, "lastEngagement": "6 days ago" }
+]

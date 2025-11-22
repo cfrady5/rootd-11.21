@@ -14,6 +14,15 @@ import {
   DrawerContainer,
   EmptyState
 } from '../components/director/PremiumComponents.jsx';
+import {
+  MatchFeedCard,
+  ComplianceTimelineCard,
+  PayoutTrackingCard,
+  DeliverablesList,
+  DocumentVault,
+  InAppMessaging,
+  SmartNotifications
+} from '../components/athlete/PremiumCards.jsx';
 
 const gray = {
   background: '#f5f7fb',
@@ -107,6 +116,136 @@ export default function MyDashboard() {
     raw: deal
   }));
 
+  const matchFeedData = useMemo(() => {
+    if (!Array.isArray(matches) || matches.length === 0) return [];
+    return matches.slice(0, 4).map((match, index) => ({
+      id: match.id ?? `match-${index}`,
+      brand: match.business?.name ?? match.business ?? match.partner ?? 'New match',
+      description: match.pitch ?? match.summary ?? match.description ?? 'New opportunity curated by Rootd.',
+      confidence: Math.round(match.match_confidence ?? match.matchConfidence ?? match.score ?? 82),
+      payout: formatCurrency(match.compensation_cash ?? match.offer ?? match.value ?? 0)
+    }));
+  }, [matches]);
+
+  const complianceTimeline = useMemo(() => {
+    return [
+      {
+        id: 'timeline-1',
+        label: 'Submit updated W9 + NIL disclosure',
+        status: readiness?.compliance >= 95 ? 'completed' : 'pending',
+        due: 'Today',
+        owner: 'You'
+      },
+      {
+        id: 'timeline-2',
+        label: 'Upload proof for latest deliverable',
+        status: 'due',
+        due: 'Tomorrow',
+        owner: 'Rootd finance'
+      },
+      {
+        id: 'timeline-3',
+        label: 'Policy attestation + training module',
+        status: 'pending',
+        due: 'Friday',
+        owner: 'Compliance automation'
+      },
+      {
+        id: 'timeline-4',
+        label: 'Archive ACH confirmation',
+        status: 'completed',
+        due: 'Cleared',
+        owner: 'Rootd autopilot'
+      }
+    ];
+  }, [readiness]);
+
+  const payoutTracking = useMemo(() => {
+    if (!Array.isArray(deals) || deals.length === 0) return [];
+    const stageToProgress = {
+      pending: 20,
+      negotiation: 35,
+      pending_payment: 55,
+      approved: 70,
+      executed: 95,
+      completed: 100
+    };
+    return deals.slice(0, 4).map((deal, index) => {
+      const status = mapDealStatus(deal.status);
+      return {
+        id: deal.id ?? `payout-${index}`,
+        brand: deal.business?.name ?? deal.business ?? 'Deal partner',
+        amount: deal.compensation_cash ?? deal.offer_value ?? 0,
+        status,
+        notes: `${deal.deliverables?.length ?? 0} deliverables • ${deal.match_confidence ?? deal.matchConfidence ?? '82'} match score`,
+        progress: stageToProgress[status] ?? 40
+      };
+    });
+  }, [deals]);
+
+  const deliverablesData = useMemo(() => {
+    if (!Array.isArray(deals) || deals.length === 0) return [];
+    const rows = [];
+    deals.forEach((deal, dealIndex) => {
+      (deal.deliverables ?? []).forEach((deliverable, idx) => {
+        rows.push({
+          id: deliverable.id ?? `deliverable-${dealIndex}-${idx}`,
+          title: deliverable.title ?? deliverable.name ?? 'Deliverable',
+          deadline: formatDeadlineLabel(deliverable.due_date ?? deliverable.deadline),
+          status: deliverable.status ?? 'pending',
+          description: deliverable.notes ?? deliverable.description ?? `Upload proof for ${deal.business?.name ?? 'deal room entry'}.`,
+          location: deal.business?.name ?? 'Deal room'
+        });
+      });
+    });
+    return rows.slice(0, 4);
+  }, [deals]);
+
+  const documentVaultData = useMemo(() => {
+    const docs = profile?.documents;
+    if (!Array.isArray(docs) || docs.length === 0) return [];
+    return docs.slice(0, 4).map((doc, index) => ({
+      id: doc.id ?? `doc-${index}`,
+      name: doc.name ?? doc.title ?? `Document ${index + 1}`,
+      type: doc.type ?? doc.category ?? 'Upload',
+      size: doc.size ?? doc.filesize ?? formatReadableBytes(doc.bytes),
+      updated: doc.updated_at ? formatDeadlineLabel(doc.updated_at) : 'Recently'
+    }));
+  }, [profile]);
+
+  const notificationsData = useMemo(() => {
+    const list = [];
+    if (matches.length) {
+      list.push({
+        id: 'note-match',
+        category: 'deals',
+        title: `${matches[0].business?.name ?? 'New match'} is ready`,
+        detail: 'Review the match brief and leave pricing guidance.',
+        time: 'Just now',
+        read: false
+      });
+    }
+    if (deals.length) {
+      list.push({
+        id: 'note-payout',
+        category: 'payouts',
+        title: `${deals[0].business?.name ?? 'Deal'} payout queued`,
+        detail: `${formatCurrency(deals[0].compensation_cash ?? 0)} scheduled via Rootd Finance.`,
+        time: 'Today',
+        read: false
+      });
+    }
+    list.push({
+      id: 'note-compliance',
+      category: 'compliance',
+      title: 'Compliance score check',
+      detail: `Rootd score at ${formatPercent(readiness?.compliance) ?? '—'}—no overdue tasks.`,
+      time: 'Today',
+      read: true
+    });
+    return list;
+  }, [matches, deals, readiness]);
+
   const accountColumns = [
     {
       key: 'channel',
@@ -164,6 +303,22 @@ export default function MyDashboard() {
           {statCards.map((card) => (
             <StatCard key={card.key} {...card} />
           ))}
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))', gap: '24px' }}>
+          <MatchFeedCard matches={matchFeedData} />
+          <ComplianceTimelineCard tasks={complianceTimeline} />
+          <PayoutTrackingCard payouts={payoutTracking} />
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: '24px' }}>
+          <DeliverablesList deliverables={deliverablesData} />
+          <DocumentVault documents={documentVaultData} />
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))', gap: '24px' }}>
+          <InAppMessaging />
+          <SmartNotifications notifications={notificationsData} />
         </div>
 
         <div style={{ display: 'grid', gap: '24px', gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))' }}>
@@ -360,4 +515,23 @@ function formatFollowers(value) {
   if (number >= 1_000_000) return `${(number / 1_000_000).toFixed(1)}M`;
   if (number >= 1_000) return `${(number / 1_000).toFixed(1)}K`;
   return number.toLocaleString();
+}
+
+function formatDeadlineLabel(value) {
+  if (!value) return 'Soon';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function formatReadableBytes(bytes) {
+  if (!bytes || Number.isNaN(Number(bytes))) return '—';
+  const units = ['B', 'KB', 'MB', 'GB'];
+  let current = Number(bytes);
+  let unitIndex = 0;
+  while (current >= 1024 && unitIndex < units.length - 1) {
+    current /= 1024;
+    unitIndex += 1;
+  }
+  return `${current.toFixed(current >= 10 || unitIndex === 0 ? 0 : 1)} ${units[unitIndex]}`;
 }

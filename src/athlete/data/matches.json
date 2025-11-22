@@ -1,0 +1,42 @@
+[
+  {
+    "id": "match-001",
+    "business": "Allbirds",
+    "category": "Sustainable Lifestyle",
+    "distance": "4.2 mi",
+    "value": "$18,500",
+    "score": 92
+  },
+  {
+    "id": "match-002",
+    "business": "WHOOP",
+    "category": "Wearables",
+    "distance": "Remote",
+    "value": "$12,000",
+    "score": 88
+  },
+  {
+    "id": "match-003",
+    "business": "Patagonia",
+    "category": "Outdoor",
+    "distance": "12.5 mi",
+    "value": "$24,000",
+    "score": 85
+  },
+  {
+    "id": "match-004",
+    "business": "Away",
+    "category": "Travel",
+    "distance": "Remote",
+    "value": "$15,200",
+    "score": 80
+  },
+  {
+    "id": "match-005",
+    "business": "Lululemon Studio",
+    "category": "Performance Apparel",
+    "distance": "7.8 mi",
+    "value": "$21,750",
+    "score": 77
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "id": "athlete-ava-thompson",
+  "firstName": "Ava",
+  "lastName": "Thompson",
+  "fullName": "Ava Thompson",
+  "sport": "Women’s Soccer",
+  "year": "Senior",
+  "school": "Stanford University",
+  "email": "ava.thompson@stanford.edu",
+  "university": "Stanford University",
+  "major": "Science, Technology & Society",
+  "interests": [
+    "Sustainable fashion",
+    "Creative direction",
+    "Leadership workshops",
+    "Travel content"
+  ],
+  "location": "Palo Alto, CA",
+  "bio": "Captain of Stanford Women’s Soccer. Focused on partnerships that highlight sustainability, leadership, and women-led initiatives.",
+  "summary": {
+    "sport": "Women’s Soccer",
+    "year": "Senior",
+    "school": "Stanford University"
+  },
+  "analytics": {
+    "potentialMatches": 12,
+    "profileCompletion": 94,
+    "complianceDocs": 4,
+    "nilEstimate": "$62K"
+  }
+}

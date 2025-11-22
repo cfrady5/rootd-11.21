@@ -5,6 +5,14 @@
 :root {
   --brand-green: #4c5937;
   --brand-green-dark: #3a4528;
+  --brand-charcoal: #0f172a;
+  --brand-bone: #f7f8f2;
+  --brand-surface: rgba(255, 255, 255, 0.85);
+  --type-display: clamp(2.3rem, 4vw, 3.8rem);
+  --type-headline: clamp(1.6rem, 2.6vw, 2.6rem);
+  --type-subhead: 1.25rem;
+  --type-body: 1rem;
+  --type-small: 0.9rem;
 }
 
 * {
@@ -13,9 +21,15 @@
 
 body {
   margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background-color: #f3f4f6;
-  color: #111827;
+  font-family: 'Inter', "SF Pro Display", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.9), #eef1e7 35%, #e0e5d4 80%);
+  color: var(--brand-charcoal);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+main, section, article {
+  scroll-margin-top: 96px;
 }
 
 a {
@@ -67,6 +81,16 @@ select {
 
 .touch-target {
   min-height: 44px;
+}
+
+@keyframes statPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.stat-pulse {
+  animation: statPulse 3s ease-in-out infinite;
 }
 
 @media (max-width: 1024px) {

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "comp-001",
+    "title": "Missing W-9",
+    "detail": "Liam Bennett has not uploaded a W-9 for the SoFi partnership.",
+    "severity": "high",
+    "status": "Open"
+  },
+  {
+    "id": "comp-002",
+    "title": "Pending tax docs",
+    "detail": "Miles Garner needs 1099 acknowledgment for Titleist.",
+    "severity": "medium",
+    "status": "Open"
+  },
+  {
+    "id": "comp-003",
+    "title": "Pending approval",
+    "detail": "Maya Chen’s Lululemon extension requires director sign-off.",
+    "severity": "high",
+    "status": "Escalated"
+  },
+  {
+    "id": "comp-004",
+    "title": "Incomplete disclosures",
+    "detail": "Three athletes have incomplete social amplification disclosures.",
+    "severity": "low",
+    "status": "Monitoring"
+  }
+]

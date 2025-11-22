@@ -1,0 +1,14 @@
+{
+  "categories": [
+    { "label": "Lifestyle", "count": 18 },
+    { "label": "Financial Services", "count": 11 },
+    { "label": "Media & Streaming", "count": 7 },
+    { "label": "Luxury", "count": 5 },
+    { "label": "Food & Beverage", "count": 9 }
+  ],
+  "businessPulse": {
+    "activePartners": 26,
+    "avgTurnaround": "4.2 days",
+    "renewalRate": 82
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "university": {
+    "name": "Stanford University",
+    "logo": "https://upload.wikimedia.org/wikipedia/commons/4/42/Stanford_Cardinal_logo.svg",
+    "tagline": "Director Portal — NIL Intelligence"
+  },
+  "metrics": [
+    { "label": "Total Athletes", "value": 187, "delta": "+12 this month" },
+    { "label": "Active Deals", "value": 63, "delta": "+7 since Friday" },
+    { "label": "Deal Value (Semester)", "value": "$4.2M", "delta": "↑ 18% QoQ" },
+    { "label": "Compliance Alerts", "value": 4, "delta": "2 high priority" }
+  ]
+}

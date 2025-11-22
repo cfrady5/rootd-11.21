@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Activity, Briefcase, ShieldCheck, UserCircle, Users, HelpCircle } from 'lucide-react';
+import { Activity, Briefcase, ShieldCheck, UserCircle, Users, LayoutDashboard, HelpCircle } from 'lucide-react';
 import { Button, StatusBadge } from '../components/director/PremiumComponents.jsx';
 
 const brand = {
@@ -14,6 +14,7 @@ const navItems = [
   { label: 'Overview', to: '/dashboard/overview', icon: Activity },
   { label: 'Matches', to: '/dashboard/matches', icon: Users },
   { label: 'Deals', to: '/dashboard/deals', icon: Briefcase },
+  { label: 'Cockpit', to: '/dashboard/cockpit', icon: LayoutDashboard },
   { label: 'Compliance', to: '/dashboard/compliance', icon: ShieldCheck },
   { label: 'Profile', to: '/dashboard/profile', icon: UserCircle }
 ];

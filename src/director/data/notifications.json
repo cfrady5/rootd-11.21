@@ -1,0 +1,30 @@
+[
+  {
+    "id": "note-001",
+    "title": "Compliance review needed",
+    "detail": "Maya Chen is missing tax disclosures for her Lululemon activation.",
+    "timestamp": "2m ago",
+    "actionLabel": "Resolve"
+  },
+  {
+    "id": "note-002",
+    "title": "Contract awaiting signature",
+    "detail": "Sofia Alvarez x Rolex renewal needs your approval.",
+    "timestamp": "12m ago",
+    "actionLabel": "Review"
+  },
+  {
+    "id": "note-003",
+    "title": "New business inquiry",
+    "detail": "Airbnb Experiences wants to brief the women’s volleyball roster.",
+    "timestamp": "45m ago",
+    "actionLabel": "View"
+  },
+  {
+    "id": "note-004",
+    "title": "IRS threshold alert",
+    "detail": "3 athletes are within 5% of the $600 reporting threshold.",
+    "timestamp": "1h ago",
+    "actionLabel": "Audit"
+  }
+]
