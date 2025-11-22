@@ -36,7 +36,7 @@ export default function Navbar() {
 	};
 
 	const linkClass = ({ isActive }) =>
-		`text-sm font-semibold transition-colors ${isActive ? 'text-rootd-pine' : 'text-slate-500 hover:text-rootd-pine'}`;
+		`text-base font-semibold tracking-wide transition-colors ${isActive ? 'text-rootd-pine' : 'text-slate-500 hover:text-rootd-pine'}`;
 
 	const renderLinks = () => (
 		<nav className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -50,13 +50,13 @@ export default function Navbar() {
 
 	return (
 		<header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
-			<div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+			<div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-4 py-4 sm:px-10 lg:px-12">
 				<button
 					type="button"
 					className="flex items-center gap-2 text-left"
 					onClick={() => navigate('/dashboard')}
 				>
-					<img src={RootdLogo} alt="Rootd" className="h-9 w-auto" />
+					<img src={RootdLogo} alt="Rootd" className="h-15 w-auto" />
 					<div>
 						<p className="text-xs uppercase tracking-[0.3em] text-slate-400">Rootd</p>
 						<p className="font-display text-lg font-semibold text-slate-900">NIL OS</p>

@@ -23,6 +23,7 @@ import AthleteMatches from './athlete/pages/AthleteMatches.jsx';
 import AthleteEditProfile from './athlete/pages/AthleteEditProfile.jsx';
 import SignIn from './pages/SignIn.jsx';
 import SignUp from './pages/SignUp.jsx';
+import RootdQuiz from './pages/RootdQuiz.jsx';
 import Onboarding from './pages/Onboarding.jsx';
 import ProtectedRoute from './components/routing/ProtectedRoute.jsx';
 
@@ -46,17 +47,21 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Public marketing pages with AppShell navbar */}
         <Route element={<PublicLayout />}>
           <Route index element={<Home />} />
           <Route path="demo" element={<Demo />} />
           <Route path="about" element={<About />} />
           <Route path="signin" element={<SignIn />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="quiz" element={<RootdQuiz />} />
         </Route>
 
+        {/* Protected routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/onboarding" element={<Onboarding />} />
 
+          {/* Main dashboard */}
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<Overview />} />
@@ -67,6 +72,7 @@ export default function App() {
             <Route path="profile" element={<Profile />} />
           </Route>
 
+          {/* Director portal */}
           <Route path="/director" element={<DirectorLayout />}>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<DirectorDashboard />} />
@@ -76,6 +82,7 @@ export default function App() {
             <Route path="profile" element={<DirectorProfile />} />
           </Route>
 
+          {/* Athlete portal - now accessible from main site */}
           <Route path="/athlete" element={<AthleteLayout />}>
             <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<AthleteOverview />} />

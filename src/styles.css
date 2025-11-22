@@ -8,6 +8,15 @@
   --brand-charcoal: #0f172a;
   --brand-bone: #f7f8f2;
   --brand-surface: rgba(255, 255, 255, 0.85);
+  
+  /* Rootd brand colors for auth */
+  --brand-primary: #788D57;
+  --brand-primary-hover: #5E7043;
+  --bg: #F7F3EB;
+  --ink: #1e293b;
+  --ink-muted: #64748b;
+  --hair: #e2e8f0;
+  
   --type-display: clamp(2.3rem, 4vw, 3.8rem);
   --type-headline: clamp(1.6rem, 2.6vw, 2.6rem);
   --type-subhead: 1.25rem;
