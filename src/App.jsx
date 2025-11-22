@@ -21,6 +21,10 @@ import AthleteLayout from './athlete/layouts/AthleteLayout.jsx';
 import AthleteOverview from './athlete/pages/AthleteOverview.jsx';
 import AthleteMatches from './athlete/pages/AthleteMatches.jsx';
 import AthleteEditProfile from './athlete/pages/AthleteEditProfile.jsx';
+import SignIn from './pages/SignIn.jsx';
+import SignUp from './pages/SignUp.jsx';
+import Onboarding from './pages/Onboarding.jsx';
+import ProtectedRoute from './components/routing/ProtectedRoute.jsx';
 
 function PublicLayout() {
   return (
@@ -46,32 +50,38 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="demo" element={<Demo />} />
           <Route path="about" element={<About />} />
+          <Route path="signin" element={<SignIn />} />
+          <Route path="signup" element={<SignUp />} />
         </Route>
 
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<Navigate to="overview" replace />} />
-          <Route path="overview" element={<Overview />} />
-          <Route path="matches" element={<Matches />} />
-          <Route path="deals" element={<Deals />} />
-          <Route path="cockpit" element={<Cockpit />} />
-          <Route path="compliance" element={<Compliance />} />
-          <Route path="profile" element={<Profile />} />
-        </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route path="/onboarding" element={<Onboarding />} />
 
-        <Route path="/director" element={<DirectorLayout />}>
-          <Route index element={<Navigate to="dashboard" replace />} />
-          <Route path="dashboard" element={<DirectorDashboard />} />
-          <Route path="roster" element={<DirectorRoster />} />
-          <Route path="deals" element={<DirectorDeals />} />
-          <Route path="compliance" element={<DirectorCompliance />} />
-          <Route path="profile" element={<DirectorProfile />} />
-        </Route>
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Navigate to="overview" replace />} />
+            <Route path="overview" element={<Overview />} />
+            <Route path="matches" element={<Matches />} />
+            <Route path="deals" element={<Deals />} />
+            <Route path="cockpit" element={<Cockpit />} />
+            <Route path="compliance" element={<Compliance />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
 
-        <Route path="/athlete" element={<AthleteLayout />}>
-          <Route index element={<Navigate to="overview" replace />} />
-          <Route path="overview" element={<AthleteOverview />} />
-          <Route path="matches" element={<AthleteMatches />} />
-          <Route path="edit-profile" element={<AthleteEditProfile />} />
+          <Route path="/director" element={<DirectorLayout />}>
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<DirectorDashboard />} />
+            <Route path="roster" element={<DirectorRoster />} />
+            <Route path="deals" element={<DirectorDeals />} />
+            <Route path="compliance" element={<DirectorCompliance />} />
+            <Route path="profile" element={<DirectorProfile />} />
+          </Route>
+
+          <Route path="/athlete" element={<AthleteLayout />}>
+            <Route index element={<Navigate to="overview" replace />} />
+            <Route path="overview" element={<AthleteOverview />} />
+            <Route path="matches" element={<AthleteMatches />} />
+            <Route path="edit-profile" element={<AthleteEditProfile />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

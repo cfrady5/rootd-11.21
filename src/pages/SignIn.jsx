@@ -49,72 +49,79 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-rootd-cream px-4">
-      <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-rootd">
-        <div className="mb-8 text-center">
-          <p className="text-xs uppercase tracking-[0.35em] text-slate-400">Rootd Access</p>
-          <h1 className="mt-3 font-display text-3xl text-slate-900">Sign in</h1>
-          <p className="mt-2 text-sm text-slate-500">Welcome back. Pick up right where you left off.</p>
+    <div className="flex min-h-[70vh] items-center justify-center bg-[#fbfcf7] px-4 py-20">
+      <div className="relative w-full max-w-lg rounded-[32px] border border-white/70 bg-white/95 p-10 shadow-[0_45px_90px_rgba(15,23,42,0.12)] backdrop-blur">
+        <div className="absolute inset-x-6 top-0 h-1 rounded-full bg-gradient-to-r from-[#24b14a] via-[#5fd479] to-[#24b14a] opacity-80" aria-hidden />
+        <div className="mt-6 mb-10 space-y-2 text-center">
+          <p className="text-[13px] font-semibold uppercase tracking-[0.4em] text-slate-400">rootd access</p>
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900">Welcome back</h1>
+          <p className="text-sm text-slate-500">Sign in to continue your journey.</p>
         </div>
 
         {error && (
-          <div className="mb-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
+          <div className="mb-6 rounded-2xl border border-rose-100 bg-rose-50/90 px-4 py-3 text-sm text-rose-800">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="mb-7 rounded-[22px] border border-slate-200 bg-slate-50/60 p-1 text-sm font-semibold text-slate-600">
+          <div className="grid grid-cols-2 overflow-hidden rounded-[18px]">
+            <button
+              type="button"
+              onClick={handleGoogle}
+              className="flex items-center justify-center border-r border-slate-200/70 bg-white py-2 text-slate-800 transition hover:text-rootd-pine"
+            >
+              Google
+            </button>
+            <button
+              type="button"
+              disabled
+              className="flex items-center justify-center bg-transparent py-2 text-slate-400"
+            >
+              Apple
+            </button>
+          </div>
+          <p className="mt-3 text-center text-[10px] font-semibold tracking-[0.45em] text-slate-300">OR CONTINUE WITH EMAIL</p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
           <label className="block text-left">
-            <span className="text-sm font-semibold text-slate-600">Email</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">Email</span>
             <input
               type="email"
               name="email"
               value={formState.email}
               onChange={handleChange}
               required
-              className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-900 focus:border-rootd-pine focus:outline-none"
+              placeholder="you@example.com"
+              className="mt-3 w-full rounded-[18px] border border-slate-200/80 bg-slate-50/70 px-5 py-3.5 text-base text-slate-900 focus:border-rootd-pine focus:bg-white focus:outline-none"
             />
           </label>
 
           <label className="block text-left">
-            <span className="text-sm font-semibold text-slate-600">Password</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.4em] text-slate-500">Password</span>
             <input
               type="password"
               name="password"
               value={formState.password}
               onChange={handleChange}
               required
-              className="mt-2 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-900 focus:border-rootd-pine focus:outline-none"
+              className="mt-3 w-full rounded-[18px] border border-slate-200/80 bg-slate-50/70 px-5 py-3.5 text-base text-slate-900 focus:border-rootd-pine focus:bg-white focus:outline-none"
             />
           </label>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-2xl bg-rootd-pine py-3 text-sm font-semibold text-white transition hover:bg-rootd-pine-dark disabled:opacity-60"
+            className="w-full rounded-full bg-[#24b14a] py-3.5 text-base font-semibold text-white shadow-[0_12px_30px_rgba(21,128,61,0.25)] transition hover:bg-[#18963c] disabled:opacity-60"
           >
-            {loading ? 'Signing in…' : 'Sign in'}
+            {loading ? 'Signing in…' : 'Login'}
           </button>
         </form>
 
-        <div className="my-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-slate-300">
-          <span className="h-px flex-1 bg-slate-200" />
-          Or
-          <span className="h-px flex-1 bg-slate-200" />
-        </div>
-
-        <button
-          type="button"
-          onClick={handleGoogle}
-          className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-600 transition hover:border-slate-300"
-        >
-          <span className="h-5 w-5 rounded-full bg-slate-200" aria-hidden />
-          Sign in with Google
-        </button>
-
-        <p className="mt-6 text-center text-sm text-slate-500">
-          Need an account?{' '}
-          <Link to="/signup" className="font-semibold text-rootd-pine">Create one</Link>
+        <p className="mt-8 text-center text-sm text-slate-500">
+          Don’t have an account?{' '}
+          <Link to="/signup" className="font-semibold text-[#24b14a]">Sign up</Link>
         </p>
       </div>
     </div>
