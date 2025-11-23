@@ -14,14 +14,17 @@ export default function DirectorLayout() {
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-white">
       <header className="sticky top-0 z-40 backdrop-blur border-b border-white/10 bg-[#050505]/90">
-        <div className="max-w-[1400px] mx-auto px-6 lg:px-10 py-4 flex items-center justify-between gap-8">
+        <div className="max-w-screen-xl mx-auto px-6 lg:px-10 py-4 flex items-center justify-between gap-8">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-rootd-green/30 border border-rootd-green/40 flex items-center justify-center text-white font-semibold">
               R
             </div>
             <div>
               <p className="text-sm uppercase tracking-[0.4em] text-white/60">Rootd NIL</p>
-              <p className="font-semibold text-lg tracking-tight">Director Portal</p>
+              <div className="flex items-center gap-3">
+                <p className="font-semibold text-lg tracking-tight">Director Portal</p>
+                <span className="hidden md:inline-flex items-center rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">Demo</span>
+              </div>
             </div>
           </div>
           <nav className="hidden md:flex items-center gap-6 text-sm">
@@ -39,12 +42,10 @@ export default function DirectorLayout() {
             Contact Team
           </button>
         </div>
-        <div className="bg-rootd-green/10 border-t border-white/10 text-center text-xs tracking-wide uppercase text-white/70 py-2">
-          You are in Demo Mode. All data is for illustrative purposes only.
-        </div>
+        
       </header>
 
-      <div className="max-w-[1400px] mx-auto w-full px-6 lg:px-10 py-10 flex gap-8">
+      <div className="max-w-screen-xl mx-auto w-full px-6 lg:px-10 py-10 flex gap-8">
         <aside className="hidden lg:block w-64 shrink-0">
           <div className="sticky top-28 space-y-8">
             <div>

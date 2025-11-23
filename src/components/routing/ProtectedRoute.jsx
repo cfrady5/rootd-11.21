@@ -2,12 +2,14 @@ import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useProfile } from '../../context/ProfileContext.jsx';
+import { getPersonaPortalPath } from '../../lib/personaRoutes.js';
 import { LoadingSpinner } from '../director/PremiumComponents.jsx';
 
 export default function ProtectedRoute() {
   const { session, loading } = useAuth();
-  const { onboardingComplete, loading: profileLoading } = useProfile();
+  const { onboardingComplete, loading: profileLoading, persona } = useProfile();
   const location = useLocation();
+  const personaPortalPath = getPersonaPortalPath(persona);
 
   if (loading || profileLoading) {
     return (
@@ -28,7 +30,7 @@ export default function ProtectedRoute() {
   if (onboardingComplete && location.pathname === '/onboarding') {
     const fallback = location.state?.from?.pathname && location.state.from.pathname !== '/onboarding'
       ? location.state.from.pathname
-      : '/dashboard';
+      : personaPortalPath;
     return <Navigate to={fallback} replace />;
   }
 

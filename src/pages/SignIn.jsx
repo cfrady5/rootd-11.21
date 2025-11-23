@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
+import { extractPersonaFromUser, getPersonaPortalPath } from '../lib/personaRoutes.js';
 
 export default function SignIn() {
-  const { signInWithPassword, signInWithGoogle } = useAuth();
+  const { signInWithPassword, signInWithGoogle, persona } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [formState, setFormState] = useState({ email: '', password: '', rememberMe: false });
@@ -19,14 +20,14 @@ export default function SignIn() {
   };
 
   const resolveDestination = (user) => {
-    if (!user) return '/';
     const next = location.state?.from?.pathname;
     // Keep user on the main site shell after auth; only deep-link if they were
     // explicitly trying to access a protected route before signing in.
     if (next && !next.startsWith('/signin') && !next.startsWith('/signup')) {
       return next;
     }
-    return '/';
+    const resolvedPersona = extractPersonaFromUser(user, persona);
+    return getPersonaPortalPath(resolvedPersona);
   };
 
   const handleSubmit = async (event) => {

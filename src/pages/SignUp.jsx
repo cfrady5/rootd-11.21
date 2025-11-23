@@ -54,17 +54,10 @@ export default function SignUp() {
   };
 
   return (
-    <div style={{
-      minHeight: 'calc(100vh - 100px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '48px 24px'
-    }}>
-      <div className="auth-card">
-        <div className="auth-header">
-          <p className="auth-eyebrow">ROOTD ACCESS</p>
-          <h1 className="auth-title">Create your account</h1>
+    <div className="auth-card">
+      <div className="auth-header">
+        <p className="auth-eyebrow">ROOTD ACCESS</p>
+        <h1 className="auth-title">Create your account</h1>
         <p className="auth-subtitle">Join the invite-only beta to access Rootd OS platform.</p>
       </div>
 
@@ -420,7 +413,6 @@ export default function SignUp() {
           }
         }
       `}</style>
-      </div>
     </div>
   );
 }

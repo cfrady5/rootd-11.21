@@ -2,90 +2,77 @@ import React from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import RootdLogo from '../../assets/branding/rootd-logo.png';
+import { Button } from '../director/PremiumComponents.jsx';
+import { getPersonaPortalPath } from '../../lib/personaRoutes.js';
+
+const navLinks = [
+  { label: 'Demo', to: '/demo' },
+  { label: 'About', to: '/about' },
+  { label: 'Dashboard', to: '/dashboard' }
+];
 
 export default function RootdHeader() {
-  const { user } = useAuth();
+  const { user, persona } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const goToAuth = (path) => {
-    navigate(path);
-  };
+  const goToAuth = (path) => navigate(path);
+  const personaPortalPath = getPersonaPortalPath(persona);
 
-  const goToDashboard = () => {
+  const handlePrimaryCta = () => {
     if (user) {
-      navigate('/dashboard');
-    } else {
-      navigate('/signin', { state: { from: { pathname: '/dashboard' } } });
+      navigate(personaPortalPath);
+      return;
     }
+    goToAuth('/signin');
   };
 
   return (
-    <header className="w-full border-b border-gray-200 bg-white">
-      <div className="max-w-screen-xl mx-auto px-4 flex items-center justify-between py-3">
-        
-        {/* Logo */}
-        <button 
+    <header className="fixed top-0 left-0 z-50 w-full">
+      <div className="mx-auto flex h-[78px] max-w-screen-xl items-center justify-between px-5 sm:px-8 lg:px-10 surface-glass">
+        <button
+          type="button"
           onClick={() => navigate('/')}
-          aria-label="Rootd home" 
-          className="flex items-center"
+          aria-label="Rootd home"
+          className="group inline-flex items-center gap-2 rounded-full bg-transparent p-0 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#4c5937]/30"
         >
-          <img
-            src={RootdLogo}
-            alt="Rootd"
-            className="h-6 w-auto object-contain"
-          />
+          <img src={RootdLogo} alt="Rootd" className="h-[1.6rem] w-auto" />
         </button>
 
-        {/* Nav links */}
-        <nav className="flex items-center gap-8 text-[17px] font-medium">
-          <NavLink
-            to="/"
-            className={location.pathname === '/' 
-              ? "text-[#4a5838] underline underline-offset-4"
-              : "text-slate-600 hover:text-slate-800 transition"
-            }
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/demo"
-            className={location.pathname === '/demo'
-              ? "text-[#4a5838] underline underline-offset-4"
-              : "text-slate-600 hover:text-slate-800 transition"
-            }
-          >
-            Demo
-          </NavLink>
-          <NavLink
-            to="/about"
-            className={location.pathname === '/about'
-              ? "text-[#4a5838] underline underline-offset-4"
-              : "text-slate-600 hover:text-slate-800 transition"
-            }
-          >
-            About
-          </NavLink>
+        <nav className="flex flex-1 items-center justify-center px-4 sm:px-7" style={{ gap: '12px' }}>
+          {navLinks.map(({ to, label }) => {
+            const targetPath = label === 'Dashboard' ? personaPortalPath : to;
+            const matchesActive = location.pathname === targetPath || location.pathname.startsWith(`${targetPath}/`);
+            return (
+            <NavLink
+              key={label}
+              to={targetPath}
+              className={() =>
+                `inline-flex items-center rounded-full px-4 py-2 text-[13px] font-medium tracking-[0.06em] no-underline transition-all duration-200 focus-visible:outline-none focus:no-underline focus-visible:no-underline active:no-underline ${
+                  matchesActive
+                    ? 'bg-[#4c5937] text-white shadow-sm'
+                    : 'text-[#1f2716]/70 hover:text-[#1f2716] hover:bg-white/70'
+                }`
+              }
+            >
+              {label}
+            </NavLink>
+            );
+          })}
         </nav>
 
-        {/* Right-side actions */}
-        <div className="flex items-center gap-3">
-          <button 
-            onClick={() => goToAuth('/signin')}
-            className="rounded-full border border-gray-300 px-4 py-1.5 text-slate-700 text-sm hover:bg-gray-50 transition"
+        <div className="flex items-center">
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={handlePrimaryCta}
+            aria-label={user ? 'Open portal' : 'Sign in'}
+            style={{ padding: '14px 30px', fontSize: '0.95rem', letterSpacing: '0.01em', boxShadow: 'var(--shadow-sm)' }}
           >
-            Sign in
-          </button>
-
-          <button 
-            onClick={goToDashboard}
-            className="rounded-full bg-[#4a5838] text-white px-4 py-1.5 text-sm hover:bg-[#3f4c31] transition"
-          >
-            Dashboard
-          </button>
+            {user ? 'Open portal' : 'Sign in'}
+          </Button>
         </div>
-
-      </div>
+  </div>
     </header>
   );
 }

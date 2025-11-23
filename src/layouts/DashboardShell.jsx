@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Activity, Briefcase, ShieldCheck, UserCircle, Users, LayoutDashboard, HelpCircle } from 'lucide-react';
 import { Button, StatusBadge } from '../components/director/PremiumComponents.jsx';
+import RootdHeader from '../components/layout/RootdHeader.jsx';
 
 const brand = {
   surface: '#ffffff',
@@ -19,10 +20,13 @@ const navItems = [
   { label: 'Profile', to: '/dashboard/profile', icon: UserCircle }
 ];
 
+const HEADER_OFFSET = 110;
+
 export default function DashboardShell({ children }) {
   return (
     <div style={{ minHeight: '100vh', backgroundColor: brand.background }}>
-      <div style={{ display: 'flex', minHeight: '100vh' }}>
+      <RootdHeader />
+      <div style={{ display: 'flex', minHeight: `calc(100vh - ${HEADER_OFFSET}px)`, paddingTop: `${HEADER_OFFSET}px` }}>
         <aside
           style={{
             width: '280px',
