@@ -11,7 +11,7 @@ import notifications from '../data/notifications.json';
 
 const rosterPreview = athletes.slice(0, 4);
 
-const statTileClass = 'rounded-[24px] border border-white/10 bg-white/5 p-6 shadow-[0_25px_80px_rgba(2,3,4,0.35)]';
+const statTileClass = 'rounded-[20px] border border-black/5 bg-white p-6 shadow-sm';
 
 export default function DirectorDashboard() {
   const rosterColumns = [
@@ -43,52 +43,51 @@ export default function DirectorDashboard() {
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="relative overflow-hidden rounded-[40px] border border-white/10 bg-gradient-to-br from-[#101217] via-[#141f1d] to-[#2c4030] p-10 shadow-[0_70px_140px_rgba(0,0,0,0.55)]"
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="relative overflow-hidden rounded-[32px] border border-black/5 bg-white/95 p-8 text-[#111827] shadow-md"
         >
           <div className="flex flex-wrap items-start justify-between gap-6">
             <div>
-              <p className="text-xs uppercase tracking-[0.5em] text-white/60">{stats.university.tagline}</p>
-              <h1 className="mt-3 text-4xl sm:text-5xl font-semibold tracking-tight text-white">Director Intelligence</h1>
-              <p className="mt-4 max-w-2xl text-base text-white/70">
+              <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#9ca3af]">Director dashboard</p>
+              <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl text-[#111827]">{stats.university.name}</h1>
+              <p className="mt-3 max-w-2xl text-sm text-[#6b7280]">
                 Orchestrate athletes, deals, and compliance from a single calm surface with realtime health indicators
                 built for NIL leaders.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
-                <button className="inline-flex items-center gap-2 rounded-3xl bg-rootd-green px-5 py-3 text-sm font-semibold text-black transition hover:bg-[#86b46b]">
-                  Launch workflow
+                <button className="inline-flex items-center gap-2 rounded-full bg-rootd-green px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-[#86b46b]">
+                  Create deal workflow
                   <ArrowUpRight className="h-4 w-4" />
                 </button>
-                <button className="inline-flex items-center gap-2 rounded-3xl border border-white/30 bg-white/5 px-5 py-3 text-sm font-semibold text-white/80">
+                <button className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-5 py-2.5 text-sm font-semibold text-[#111827] hover:bg-[#f9fafb]">
                   <Download className="h-4 w-4" />
                   Export snapshot
                 </button>
               </div>
             </div>
-            <div className="min-w-[220px] rounded-[28px] border border-white/20 bg-white/5 px-5 py-4 text-right backdrop-blur">
-              <p className="text-xs uppercase tracking-[0.4em] text-white/60">Active deals</p>
-              <p className="text-4xl font-semibold text-white">{stats.metrics[1].value}</p>
-              <p className="text-sm text-white/70">{stats.metrics[1].delta}</p>
+            <div className="min-w-[220px] rounded-3xl border border-black/5 bg-[#f9fafb] px-5 py-4 text-right shadow-sm">
+              <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#9ca3af]">Active deals</p>
+              <p className="mt-1 text-4xl font-semibold text-[#111827]">{stats.metrics[1].value}</p>
+              <p className="text-sm text-[#6b7280]">{stats.metrics[1].delta}</p>
             </div>
           </div>
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
-            <motion.div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-white/80" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3 }}>
-              <p className="text-xs uppercase tracking-[0.5em] text-white/60">Partners</p>
-              <p className="mt-2 text-3xl font-semibold text-white">{insights.businessPulse.activePartners}</p>
-              <p className="text-sm">Active strategic partners</p>
+            <motion.div className="rounded-2xl border border-black/5 bg-[#f9fafb] p-4 text-[#111827]" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3 }}>
+              <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#9ca3af]">Partners</p>
+              <p className="mt-2 text-3xl font-semibold text-[#111827]">{insights.businessPulse.activePartners}</p>
+              <p className="text-sm text-[#6b7280]">Active strategic partners</p>
             </motion.div>
-            <motion.div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-white/80" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 0.05 }}>
-              <p className="text-xs uppercase tracking-[0.5em] text-white/60">Turnaround</p>
-              <p className="mt-2 text-3xl font-semibold text-white">{insights.businessPulse.avgTurnaround}</p>
-              <p className="text-sm">Avg contracting cycle</p>
+            <motion.div className="rounded-2xl border border-black/5 bg-[#f9fafb] p-4 text-[#111827]" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 0.05 }}>
+              <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#9ca3af]">Turnaround</p>
+              <p className="mt-2 text-3xl font-semibold text-[#111827]">{insights.businessPulse.avgTurnaround}</p>
+              <p className="text-sm text-[#6b7280]">Avg contracting cycle</p>
             </motion.div>
-            <motion.div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-white/80" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 0.1 }}>
-              <p className="text-xs uppercase tracking-[0.5em] text-white/60">Renewals</p>
-              <p className="mt-2 text-3xl font-semibold text-white">{insights.businessPulse.renewalRate}%</p>
-              <p className="text-sm">12-mo renewal rate</p>
+            <motion.div className="rounded-2xl border border-black/5 bg-[#f9fafb] p-4 text-[#111827]" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.3, delay: 0.1 }}>
+              <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#9ca3af]">Renewals</p>
+              <p className="mt-2 text-3xl font-semibold text-[#111827]">{insights.businessPulse.renewalRate}%</p>
+              <p className="text-sm text-[#6b7280]">12-mo renewal rate</p>
             </motion.div>
           </div>
-          <div className="pointer-events-none absolute -right-20 bottom-0 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
         </motion.div>
 
         <motion.div
@@ -96,17 +95,17 @@ export default function DirectorDashboard() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.45, ease: 'easeOut', delay: 0.05 }}
-          className="rounded-[32px] border border-white/10 bg-gradient-to-b from-white/10 to-transparent p-8 shadow-[0_40px_120px_rgba(3,5,6,0.65)]"
+          className="rounded-[32px] border border-black/5 bg-white/95 p-8 shadow-md"
         >
-          <p className="text-xs uppercase tracking-[0.4em] text-white/60">Signal stack</p>
+          <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#9ca3af]">Signal stack</p>
           <div className="mt-6 space-y-5">
             {stats.metrics.map((metric, index) => (
-              <div key={metric.label} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+              <div key={metric.label} className="flex items-center justify-between rounded-2xl border border-[#e5e7eb] bg-white px-4 py-3 shadow-xs">
                 <div>
-                  <p className="text-sm font-semibold text-white">{metric.label}</p>
-                  <p className="text-xs uppercase tracking-[0.3em] text-white/50">{metric.delta}</p>
+                  <p className="text-sm font-semibold text-[#111827]">{metric.label}</p>
+                  <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#9ca3af]">{metric.delta}</p>
                 </div>
-                <p className="text-2xl font-semibold text-white">{metric.value}</p>
+                <p className="text-2xl font-semibold text-[#111827]">{metric.value}</p>
               </div>
             ))}
           </div>
@@ -123,9 +122,9 @@ export default function DirectorDashboard() {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.35, delay: 0.04 * index }}
           >
-            <p className="text-xs uppercase tracking-[0.4em] text-white/60">{metric.label}</p>
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#9ca3af]">{metric.label}</p>
             <div className="mt-3 flex items-end justify-between">
-              <p className="text-4xl font-semibold text-white">{metric.value}</p>
+              <p className="text-4xl font-semibold text-[#111827]">{metric.value}</p>
               <span className="text-sm text-rootd-green">{metric.delta}</span>
             </div>
           </motion.article>
@@ -133,7 +132,7 @@ export default function DirectorDashboard() {
       </section>
 
       <section className="grid gap-8 xl:grid-cols-[1.5fr,0.5fr]">
-  <motion.div className="rounded-[32px] border border-white/10 bg-white/5 p-6 shadow-[0_25px_80px_rgba(2,3,5,0.45)]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.45 }}>
+  <motion.div className="rounded-[32px] border border-black/5 bg-white/95 p-6 shadow-md" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.45 }}>
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <p className="text-xs uppercase tracking-[0.4em] text-white/50">Roster readiness</p>
@@ -147,7 +146,7 @@ export default function DirectorDashboard() {
             <DataTable columns={rosterColumns} data={rosterPreview} />
           </div>
         </motion.div>
-        <motion.div className="rounded-[32px] border border-white/10 bg-gradient-to-b from-white/10 to-transparent p-6 shadow-[0_25px_80px_rgba(2,3,5,0.45)]" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.45, delay: 0.05 }}>
+  <motion.div className="rounded-[32px] border border-black/5 bg-white/95 p-6 shadow-md" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.45, delay: 0.05 }}>
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.4em] text-white/50">Notifications</p>
@@ -164,7 +163,7 @@ export default function DirectorDashboard() {
       </section>
 
       <section className="grid gap-8 lg:grid-cols-[1.6fr,0.8fr]">
-  <motion.div className="rounded-[32px] border border-white/10 bg-white/5 p-6" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.45 }}>
+  <motion.div className="rounded-[32px] border border-black/5 bg-white/95 p-6 shadow-md" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.45 }}>
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.4em] text-white/50">Category momentum</p>
@@ -186,22 +185,22 @@ export default function DirectorDashboard() {
             ))}
           </div>
   </motion.div>
-  <motion.div className="rounded-[32px] border border-white/10 bg-gradient-to-b from-white/15 to-transparent p-6 space-y-6" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.45, delay: 0.05 }}>
-          <p className="text-xs uppercase tracking-[0.4em] text-white/60">Pulse</p>
+  <motion.div className="space-y-6 rounded-[32px] border border-black/5 bg-white/95 p-6 shadow-md" initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.45, delay: 0.05 }}>
+          <p className="text-xs font-medium uppercase tracking-[0.28em] text-[#9ca3af]">Pulse</p>
           <div>
-            <p className="text-white/60 text-sm">Average turnaround</p>
-            <p className="text-3xl font-semibold text-white">{insights.businessPulse.avgTurnaround}</p>
+            <p className="text-sm text-[#6b7280]">Average turnaround</p>
+            <p className="text-3xl font-semibold text-[#111827]">{insights.businessPulse.avgTurnaround}</p>
           </div>
           <div>
-            <p className="text-white/60 text-sm">Renewal rate</p>
-            <p className="text-3xl font-semibold text-white">{insights.businessPulse.renewalRate}%</p>
-            <div className="mt-3 h-2 rounded-full bg-white/10">
+            <p className="text-sm text-[#6b7280]">Renewal rate</p>
+            <p className="text-3xl font-semibold text-[#111827]">{insights.businessPulse.renewalRate}%</p>
+            <div className="mt-3 h-2 rounded-full bg-[#e5e7eb]">
               <div className="h-full rounded-full bg-rootd-green" style={{ width: `${insights.businessPulse.renewalRate}%` }} />
             </div>
           </div>
           <div>
-            <p className="text-white/60 text-sm">Deal queue</p>
-            <p className="text-3xl font-semibold text-white">{stats.metrics[2].value}</p>
+            <p className="text-sm text-[#6b7280]">Deal queue</p>
+            <p className="text-3xl font-semibold text-[#111827]">{stats.metrics[2].value}</p>
             <p className="text-sm text-rootd-green">{stats.metrics[2].delta}</p>
           </div>
         </motion.div>

@@ -12,20 +12,20 @@ const items = [
 
 export default function SidebarNav() {
   return (
-    <nav className="flex flex-col gap-2 text-sm">
+    <nav className="flex flex-col gap-1.5 text-sm">
       {items.map(({ to, label, icon: Icon }) => (
         <NavLink
           key={to}
           to={to}
           className={({ isActive }) =>
-            `flex items-center gap-3 px-4 py-3 rounded-2xl font-medium transition-all ${
+            `relative flex items-center gap-3 rounded-2xl px-3.5 py-2.5 font-medium transition-all ${
               isActive
-                ? 'bg-rootd-green/20 text-white border border-rootd-green/50 shadow-rootd-soft'
-                : 'text-white/60 hover:text-white hover:bg-white/5 border border-transparent'
+                ? 'bg-white/10 text-white shadow-sm before:absolute before:left-1 before:top-1/2 before:h-6 before:w-0.5 before:-translate-y-1/2 before:rounded-full before:bg-rootd-green'
+                : 'text-white/70 hover:bg-white/5 hover:text-white'
             }`
           }
         >
-          <Icon size={18} />
+          <Icon size={18} className="shrink-0" />
           {label}
         </NavLink>
       ))}

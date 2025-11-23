@@ -72,7 +72,7 @@ export default function RootdHeader() {
             {user ? 'Open portal' : 'Sign in'}
           </Button>
         </div>
-  </div>
+      </div>
     </header>
   );
 }
