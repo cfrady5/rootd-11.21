@@ -1,82 +1,162 @@
-import React, { useMemo, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import Tabs from '../components/Tabs.jsx';
-import LayoutWrapper from '../components/LayoutWrapper.jsx';
+import React from 'react';
+import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import athlete from '../data/athlete.json';
-
-const secondaryNav = [
-  { key: 'overview', label: 'Overview', path: '/athlete/overview' },
-  { key: 'matches', label: 'My Matches', path: '/athlete/matches' },
-  { key: 'edit', label: 'Edit Profile', path: '/athlete/edit-profile' }
-];
+import RootdLogo from '../../assets/branding/rootd-logo.png';
 
 export default function AthleteLayout() {
-  const location = useLocation();
   const navigate = useNavigate();
-  const [primaryActive, setPrimaryActive] = useState('athlete');
-
-  const activeSecondary = useMemo(() => {
-    const found = secondaryNav.find((item) => location.pathname.includes(item.path));
-    return found?.key ?? 'overview';
-  }, [location.pathname]);
-
-  const handlePrimaryChange = (key) => {
-    if (key === 'director') {
-      navigate('/director/dashboard');
-      return;
-    }
-    setPrimaryActive(key);
-  };
-
-  const handleSecondaryChange = (key) => {
-    const target = secondaryNav.find((item) => item.key === key);
-    if (target) {
-      navigate(target.path);
-    }
-  };
 
   return (
-    <div className="min-h-screen bg-[#f4f4f1] text-[#141414]">
-      <div className="sticky top-0 z-40 border-b border-black/5 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-screen-xl flex-col gap-5 px-4 py-5 sm:px-6 lg:px-0">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="space-y-1">
-              <p className="text-xs font-medium uppercase tracking-[0.25em] text-[#9ca3af]">Athlete portal</p>
-              <div className="flex items-center gap-3">
-                <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">Profile & matches</h1>
-                <span className="hidden items-center rounded-full border border-black/5 bg-black/5 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#6b7280] sm:inline-flex">
-                  Demo
-                </span>
-              </div>
-              <p className="text-sm text-[#6b7280]">{athlete.fullName} · {athlete.sport} · {athlete.year}</p>
-            </div>
-            <Tabs
-              items={[
-                { key: 'athlete', label: 'Athlete', subtle: true },
-                { key: 'director', label: 'Director', subtle: true },
-                { key: 'stanford', label: athlete.university, subtle: true }
-              ]}
-              activeKey={primaryActive}
-              onChange={handlePrimaryChange}
-            />
+    <div className="flex min-h-screen bg-gray-50">
+      {/* Dark Sidebar */}
+      <aside className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 bg-[#2b3442]">
+        {/* Logo */}
+        <div className="flex items-center gap-3 px-6 py-6 border-b border-white/10">
+          <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+            <img src={RootdLogo} alt="Rootd" className="w-6 h-6" />
           </div>
+          <span className="text-white text-xl font-bold">Rootd</span>
+        </div>
 
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex flex-wrap items-baseline gap-2 text-sm text-[#6b7280]">
-              <span className="font-medium text-[#111827]">Overview</span>
-              <span className="hidden text-[#9ca3af] sm:inline">·</span>
-              <span className="hidden text-[#6b7280] sm:inline">See your NIL readiness, matches, and profile in one view.</span>
+        {/* Main Menu */}
+        <div className="flex-1 px-4 py-6 space-y-6">
+          <div>
+            <h3 className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+              Main Menu
+            </h3>
+            <nav className="space-y-1">
+              <NavLink
+                to="/athlete/overview"
+                className={({ isActive }) =>
+                  `flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+                    isActive
+                      ? 'bg-white text-gray-900'
+                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                  }`
+                }
+              >
+                Overview
+              </NavLink>
+              <NavLink
+                to="/athlete/matches"
+                className={({ isActive }) =>
+                  `flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+                    isActive
+                      ? 'bg-white text-gray-900'
+                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                  }`
+                }
+              >
+                Matches
+              </NavLink>
+              <NavLink
+                to="/athlete/edit-profile"
+                className={({ isActive }) =>
+                  `flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+                    isActive
+                      ? 'bg-white text-gray-900'
+                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                  }`
+                }
+              >
+                Edit Profile
+              </NavLink>
+            </nav>
+          </div>
+        </div>
+
+        {/* Profile at bottom */}
+        <div className="px-4 py-4 border-t border-white/10">
+          <div className="flex items-center gap-3 px-3 py-2.5 bg-white/10 rounded-lg">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold text-sm">
+              {athlete.firstName[0]}{athlete.lastName[0]}
             </div>
-            <div className="w-full max-w-md rounded-full bg-black/5 p-1 text-sm sm:w-auto">
-              <Tabs items={secondaryNav} activeKey={activeSecondary} onChange={handleSecondaryChange} variant="segmented" />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white truncate">
+                {athlete.firstName} {athlete.lastName}
+              </p>
+              <p className="text-xs text-gray-400 truncate">{athlete.sport}</p>
             </div>
           </div>
         </div>
-      </div>
+      </aside>
 
-      <LayoutWrapper>
-        <Outlet />
-      </LayoutWrapper>
+      {/* Main content */}
+      <div className="flex-1 md:pl-64">
+        {/* Top bar */}
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
+          <div className="px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <img src={RootdLogo} alt="Rootd" className="w-8 h-8 md:hidden" />
+              <div>
+                <h1 className="text-lg font-semibold text-gray-900">Athlete Portal</h1>
+                <p className="text-sm text-gray-500">{athlete.fullName}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => navigate('/signin')}
+                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+              >
+                Sign in
+              </button>
+              <button
+                onClick={() => navigate('/signup')}
+                className="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg"
+              >
+                Get started
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {/* Mobile nav */}
+        <div className="md:hidden bg-white border-b border-gray-200 px-4 py-3">
+          <nav className="flex gap-2">
+            <NavLink
+              to="/athlete/overview"
+              className={({ isActive }) =>
+                `flex-1 text-center px-3 py-2 text-sm font-medium rounded-lg ${
+                  isActive
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-gray-100 text-gray-700'
+                }`
+              }
+            >
+              Overview
+            </NavLink>
+            <NavLink
+              to="/athlete/matches"
+              className={({ isActive }) =>
+                `flex-1 text-center px-3 py-2 text-sm font-medium rounded-lg ${
+                  isActive
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-gray-100 text-gray-700'
+                }`
+              }
+            >
+              Matches
+            </NavLink>
+            <NavLink
+              to="/athlete/edit-profile"
+              className={({ isActive }) =>
+                `flex-1 text-center px-3 py-2 text-sm font-medium rounded-lg ${
+                  isActive
+                    ? 'bg-gray-900 text-white'
+                    : 'bg-gray-100 text-gray-700'
+                }`
+              }
+            >
+              Edit Profile
+            </NavLink>
+          </nav>
+        </div>
+
+        {/* Page content */}
+        <main className="p-6">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

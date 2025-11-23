@@ -1,75 +1,126 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import SidebarNav from '../components/SidebarNav.jsx';
-import LayoutWrapper from '../components/LayoutWrapper.jsx';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import director from '../data/director.json';
+import RootdLogo from '../../assets/branding/rootd-logo.png';
 
-const topNav = [
-  { label: 'Home', to: '/' },
-  { label: 'Demo', to: '/demo' },
-  { label: 'Dashboard', to: '/dashboard/overview' },
-  { label: 'About', to: '/about' }
+const navItems = [
+  { to: '/director/dashboard', label: 'Dashboard' },
+  { to: '/director/athletes', label: 'Athletes' },
+  { to: '/director/deals', label: 'Deals' },
+  { to: '/director/compliance', label: 'Compliance' },
+  { to: '/director/insights', label: 'Insights' }
 ];
 
 export default function DirectorLayout() {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <header className="sticky top-0 z-40 backdrop-blur border-b border-white/10 bg-[#050505]/90">
-        <div className="max-w-screen-xl mx-auto px-6 lg:px-10 py-4 flex items-center justify-between gap-8">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-rootd-green/30 border border-rootd-green/40 flex items-center justify-center text-white font-semibold">
-              R
+    <div className="flex min-h-screen bg-gray-50">
+      {/* Dark Sidebar */}
+      <aside className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0 bg-[#2b3442]">
+        {/* Logo */}
+        <div className="flex items-center gap-3 px-6 py-6 border-b border-white/10">
+          <div className="w-10 h-10 rounded-lg bg-white/10 flex items-center justify-center">
+            <img src={RootdLogo} alt="Rootd" className="w-6 h-6" />
+          </div>
+          <span className="text-white text-xl font-bold">Rootd</span>
+        </div>
+
+        {/* Main Menu */}
+        <div className="flex-1 px-4 py-6 space-y-6">
+          <div>
+            <h3 className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+              Director Portal
+            </h3>
+            <nav className="space-y-1">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  className={({ isActive }) =>
+                    \`flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors \${
+                      isActive
+                        ? 'bg-white text-gray-900'
+                        : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                    }\`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+        </div>
+
+        {/* Profile at bottom */}
+        <div className="px-4 py-4 border-t border-white/10">
+          <div className="flex items-center gap-3 px-3 py-2.5 bg-white/10 rounded-lg">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+              {director.name?.[0] || 'D'}
             </div>
-            <div>
-              <p className="text-sm uppercase tracking-[0.4em] text-white/60">Rootd NIL</p>
-              <div className="flex items-center gap-3">
-                <p className="font-semibold text-lg tracking-tight">Director Portal</p>
-                <span className="hidden md:inline-flex items-center rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">Demo</span>
-              </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-white truncate">
+                {director.name || 'Director'}
+              </p>
+              <p className="text-xs text-gray-400 truncate">NIL Director</p>
             </div>
           </div>
-          <nav className="hidden md:flex items-center gap-6 text-sm">
-            {topNav.map((item) => (
+        </div>
+      </aside>
+
+      {/* Main content */}
+      <div className="flex-1 md:pl-64">
+        {/* Top bar */}
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
+          <div className="px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <img src={RootdLogo} alt="Rootd" className="w-8 h-8 md:hidden" />
+              <div>
+                <h1 className="text-lg font-semibold text-gray-900">Director Portal</h1>
+                <p className="text-sm text-gray-500">NIL Operations Center</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => navigate('/signin')}
+                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900"
+              >
+                Sign in
+              </button>
+              <button
+                onClick={() => navigate('/signup')}
+                className="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg"
+              >
+                Get started
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {/* Mobile nav */}
+        <div className="md:hidden bg-white border-b border-gray-200 px-4 py-3 overflow-x-auto">
+          <nav className="flex gap-2 min-w-max">
+            {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
-                className="text-white/70 hover:text-white transition-colors tracking-wide"
+                className={({ isActive }) =>
+                  \`px-3 py-2 text-sm font-medium rounded-lg whitespace-nowrap \${
+                    isActive
+                      ? 'bg-gray-900 text-white'
+                      : 'bg-gray-100 text-gray-700'
+                  }\`
+                }
               >
                 {item.label}
               </NavLink>
             ))}
           </nav>
-          <button className="px-4 py-2 rounded-2xl border border-white/20 bg-white/5 text-sm font-medium text-white/80">
-            Contact Team
-          </button>
         </div>
-        
-      </header>
 
-      <div className="max-w-screen-xl mx-auto w-full px-6 lg:px-10 py-10 flex gap-8">
-        <aside className="hidden lg:block w-64 shrink-0">
-          <div className="sticky top-28 space-y-8">
-            <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-white/40 mb-3">Navigation</p>
-              <SidebarNav />
-            </div>
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
-              <p className="font-semibold text-white mb-2">Need a live tour?</p>
-              <p className="text-white/60 mb-3">We’ll tailor a session around your NIL operating model.</p>
-              <button className="w-full rounded-2xl bg-rootd-green/80 hover:bg-rootd-green text-sm font-semibold py-2">
-                Schedule Call
-              </button>
-            </div>
-          </div>
-        </aside>
-
-        <main className="flex-1 space-y-8">
-          <div className="lg:hidden -mt-4">
-            <p className="text-xs uppercase tracking-[0.4em] text-white/40 mb-3">Navigation</p>
-            <SidebarNav />
-          </div>
-          <LayoutWrapper>
-            <Outlet />
-          </LayoutWrapper>
+        {/* Page content */}
+        <main className="p-6">
+          <Outlet />
         </main>
       </div>
     </div>

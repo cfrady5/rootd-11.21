@@ -1,91 +1,82 @@
-import React, { useMemo, useState } from 'react';
-import Card from '../components/Card.jsx';
-import FilterBar from '../components/FilterBar.jsx';
-import DataTable from '../components/DataTable.jsx';
-import Badge from '../components/Badge.jsx';
+import React, { useState } from 'react';
 import matches from '../data/matches.json';
-
-const categories = ['All categories', ...new Set(matches.map((match) => match.category))];
-const distances = ['Any distance', ...new Set(matches.map((match) => match.distance))];
+import {
+  SectionCard,
+  DataTable,
+  Button,
+  Badge
+} from '../../components/director/PremiumComponents.jsx';
 
 export default function AthleteMatches() {
-  const [category, setCategory] = useState('All categories');
-  const [distance, setDistance] = useState('Any distance');
   const [sortDesc, setSortDesc] = useState(true);
 
-  const filteredMatches = useMemo(() => {
-    const dataset = matches
-      .filter((match) => (category === 'All categories' ? true : match.category === category))
-      .filter((match) => (distance === 'Any distance' ? true : match.distance === distance))
-      .sort((a, b) => (sortDesc ? b.score - a.score : a.score - b.score));
-    return dataset;
-  }, [category, distance, sortDesc]);
+  const sortedMatches = [...matches].sort((a, b) => 
+    sortDesc ? b.score - a.score : a.score - b.score
+  );
 
   const columns = [
-    { header: 'Business', accessor: 'business' },
+    { 
+      key: 'business', 
+      label: 'Business',
+      render: (row) => (
+        <div>
+          <p className="font-semibold text-[#111827]">{row.business}</p>
+          <p className="text-xs text-[#6b7280]">{row.distance}</p>
+        </div>
+      )
+    },
     {
-      header: 'Category',
-      accessor: 'category',
+      key: 'category',
+      label: 'Category',
       render: (row) => <Badge>{row.category}</Badge>
     },
-    { header: 'Distance', accessor: 'distance' },
-    { header: 'Estimated Value', accessor: 'value' },
-    {
-      header: 'Match Score',
-      accessor: 'score',
+    { 
+      key: 'value', 
+      label: 'Est. Value',
       render: (row) => (
-        <span className="px-3 py-1 rounded-full bg-rootd-green/15 text-[#141414] font-semibold">{row.score}</span>
+        <span className="font-semibold text-[#111827]">{row.value}</span>
+      )
+    },
+    {
+      key: 'score',
+      label: 'Match Score',
+      render: (row) => (
+        <div className="flex items-center gap-2">
+          <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-[#4c6b38] rounded-full"
+              style={{ width: `${row.score}%` }}
+            />
+          </div>
+          <span className="text-sm font-semibold text-[#111827] w-10">{row.score}%</span>
+        </div>
       )
     }
   ];
 
   return (
-    <div className="space-y-6">
-      <Card title="Potential Matches" subtitle="Smart recommendations" actions={<span className="text-sm text-[#6b6b6b]">{filteredMatches.length} results</span>}>
-        <div className="space-y-6">
-          <FilterBar>
-            <select
-              value={category}
-              onChange={(event) => setCategory(event.target.value)}
-              className="px-4 py-2 rounded-2xl border border-black/10 text-sm"
-            >
-              {categories.map((option) => (
-                <option key={option}>{option}</option>
-              ))}
-            </select>
-            <select
-              value={distance}
-              onChange={(event) => setDistance(event.target.value)}
-              className="px-4 py-2 rounded-2xl border border-black/10 text-sm"
-            >
-              {distances.map((option) => (
-                <option key={option}>{option}</option>
-              ))}
-            </select>
-            <button
-              onClick={() => setSortDesc((prev) => !prev)}
-              className="px-4 py-2 rounded-2xl border border-black/10 text-sm"
-            >
-              Match score {sortDesc ? 'High → Low' : 'Low → High'}
-            </button>
-          </FilterBar>
-
-          <DataTable
-            columns={columns}
-            data={filteredMatches}
-            renderActions={(row) => (
-              <div className="flex gap-2">
-                <button className="px-4 py-2 rounded-2xl border border-black/10 text-sm font-medium">
-                  View
-                </button>
-                <button className="px-4 py-2 rounded-2xl bg-rootd-green/80 text-white text-sm font-semibold">
-                  Learn more
-                </button>
-              </div>
-            )}
-          />
+    <div className="space-y-6 py-2">
+      <SectionCard
+        title="Potential matches"
+        description="Smart recommendations based on your profile and preferences."
+      >
+        <div className="mb-6 flex justify-between items-center">
+          <p className="text-sm text-[#6b7280]">
+            {matches.length} potential brand partnerships
+          </p>
+          <Button
+            variant="secondary"
+            onClick={() => setSortDesc((prev) => !prev)}
+          >
+            {sortDesc ? 'Highest Match First' : 'Lowest Match First'}
+          </Button>
         </div>
-      </Card>
+
+        <DataTable
+          columns={columns}
+          data={sortedMatches}
+        />
+      </SectionCard>
     </div>
   );
 }
